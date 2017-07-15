@@ -15,6 +15,10 @@ export default class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.inputEl.focus();
+  }
+
   onStrChange = e => {
     const value = e.target.value;
     this.setState({
@@ -50,6 +54,7 @@ export default class App extends React.Component {
             type="text"
             value={this.state.str}
             onChange={this.onStrChange}
+            ref={el => this.inputEl = el}
           />
         </div>
         <div style={styles.section}>
