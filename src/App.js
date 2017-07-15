@@ -1,13 +1,6 @@
 import React from 'react';
-import createHash from 'sha.js';
-
-const sha1 = createHash('sha1');
-const sha256 = createHash('sha256');
-const sha512 = createHash('sha512');
-
-const getSha1 = str => sha1.update(str, 'utf8').digest('hex');
-const getSha256 = str => sha256.update(str, 'utf8').digest('hex');
-const getSha512 = str => sha512.update(str, 'utf8').digest('hex');
+import sha1 from 'sha1';
+import md5 from 'md5';
 
 export default class App extends React.Component {
 
@@ -17,9 +10,8 @@ export default class App extends React.Component {
     const defaultStr = 'foo';
     this.state = {
       str: defaultStr,
-      sha1Hash: getSha1(defaultStr),
-      sha256Hash: getSha256(defaultStr),
-      sha512Hash: getSha512(defaultStr),
+      sha1Hash: sha1(defaultStr),
+      md5Hash: md5(defaultStr),
     }
   }
 
@@ -27,9 +19,8 @@ export default class App extends React.Component {
     const value = e.target.value;
     this.setState({
       str: value,
-      sha1Hash: getSha1(value),
-      sha256Hash: getSha256(value),
-      sha512Hash: getSha512(value),
+      sha1Hash: sha1(value),
+      md5Hash: md5(value),
     });
   };
 
@@ -39,7 +30,10 @@ export default class App extends React.Component {
         padding: 10,
         fontSize: 40,
       },
-      sha: {
+      section: {
+        marginTop: 30,
+      },
+      hash: {
         wordBreak: 'break-all',
       }
     }
@@ -58,18 +52,16 @@ export default class App extends React.Component {
             onChange={this.onStrChange}
           />
         </div>
-        <div>
+        <div style={styles.section}>
           <div>SHA1</div>
-          <div style={styles.sha}>
+          <div style={styles.hash}>
             {this.state.sha1Hash}
           </div>
-          <div>SHA256</div>
-          <div style={styles.sha}>
-            {this.state.sha256Hash}
-          </div>
-          <div>SHA512</div>
-          <div style={styles.sha}>
-            {this.state.sha512Hash}
+        </div>
+        <div style={styles.section}>
+          <div>MD5</div>
+          <div style={styles.hash}>
+            {this.state.md5Hash}
           </div>
         </div>
       </div>

@@ -21,8 +21,9 @@
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
+    "md5": "^2.2.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "sha.js": "^2.4.8"
+    "sha1": "^1.1.1"
   }
 }
